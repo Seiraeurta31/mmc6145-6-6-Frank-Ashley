@@ -45,15 +45,39 @@ export default function Book(props) {
       router.push('/')
   }, [props.book, bookSearchResults, book, router])
 
-  async function addToFavorites() {
+  async function addToFavorites(e) {
     // TODO: use fetch to call POST /api/book
-    // Be sure to pass book in body (use JSON.stringify)
+     // Be sure to pass book in body (use JSON.stringify)
+    e.preventDefault()
+    const res = await fetch(`/api/book`, {
+      method: 'POST',
+      headers: 
+      {
+        "content-type": "application/json",
+      },
+      body: JSONstringify(book)
+    })
     // Call router.replace(router.asPath) if you receive a 200 status
+    if (res.status === 200) {
+      router.replace(router.asPath)
+      setInput("")
+    }
   }
   async function removeFromFavorites() {
     // TODO: use fetch to call DELETE /api/book
     // Be sure to pass {id: <book id>} in body (use JSON.stringify)
+    const res = await fetch(`/api/book`, {
+      method: 'DELETE',
+      headers: 
+      {
+        "content-type": "application/json",
+      },
+      body: JSONstringify({id: bookId})
+    })
     // Call router.replace(router.asPath) if you receive a 200 status
+    if (res.status === 200) {
+      router.replace(router.asPath)
+    }
   }
 
   return (
