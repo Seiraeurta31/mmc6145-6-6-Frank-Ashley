@@ -46,7 +46,7 @@ export default function Book(props) {
   }, [props.book, bookSearchResults, book, router])
 
   async function addToFavorites(e) {
-    // TODO: use fetch to call POST /api/book
+    // DONE: use fetch to call POST /api/book
      // Be sure to pass book in body (use JSON.stringify)
     e.preventDefault()
     const res = await fetch(`/api/book`, {
@@ -64,7 +64,7 @@ export default function Book(props) {
     }
   }
   async function removeFromFavorites() {
-    // TODO: use fetch to call DELETE /api/book
+    // DONE: use fetch to call DELETE /api/book
     // Be sure to pass {id: <book id>} in body (use JSON.stringify)
     const res = await fetch(`/api/book`, {
       method: 'DELETE',
