@@ -24,7 +24,7 @@ export default withIronSessionApiRoute(
         return res.status(200).json.parse(deletedBook.id)
       // DONE: Respond with 404 for all other requests
       default: 
-        return res.status(401).end()
+        return res.status(404).end()
     }
   },
   sessionOptions
