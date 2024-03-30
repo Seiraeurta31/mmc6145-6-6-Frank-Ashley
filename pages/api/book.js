@@ -29,7 +29,7 @@ export default withIronSessionApiRoute(
         console.log ("added book: ", addedBook)
         if(addedBook == null){
           console.log ("added book is null")
-          // delete req.session.user
+          req.session.destroy()
           return res.status(401)
         }
         return res.status(200).json(addedBook)
@@ -41,7 +41,7 @@ export default withIronSessionApiRoute(
         console.log ("deleted book: ", deletedBook)
         if(deletedBook == null){
           console.log ("deleted book is null")
-          // delete req.session.user
+          req.session.destroy()
           return res.status(401)
         }
         return res.status(200).json(deletedBook)
