@@ -55,14 +55,14 @@ export default function Book(props) {
       {
         "content-type": "application/json",
       },
-      body: JSONstringify(book)
+      body: JSON.stringify(book)
     })
     // Call router.replace(router.asPath) if you receive a 200 status
     if (res.status === 200) {
       router.replace(router.asPath)
-      setInput("")
-    }
+    }  
   }
+
   async function removeFromFavorites() {
     // DONE: use fetch to call DELETE /api/book
     // Be sure to pass {id: <book id>} in body (use JSON.stringify)
@@ -72,7 +72,7 @@ export default function Book(props) {
       {
         "content-type": "application/json",
       },
-      body: JSONstringify({id: bookId})
+      body: JSON.stringify({id: book.id})
     })
     // Call router.replace(router.asPath) if you receive a 200 status
     if (res.status === 200) {

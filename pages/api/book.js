@@ -7,11 +7,11 @@ export default withIronSessionApiRoute(
   async function handler(req, res) {
 
     // User info can be accessed with req.session
-    const { id: userId } = req.session.id
-    
+    const {id: userId} = req.session
+
     // No user info on the session means the user is not logged in
     if(!userId)
-      return res.status(404).end()
+      return res.status(401).end()
 
     // DONE: On a POST request, add a book using db.book.add with request body (must use JSON.parse)
     // DONE: On a DELETE request, remove a book using db.book.remove with request body (must use JSON.parse)
@@ -20,11 +20,11 @@ export default withIronSessionApiRoute(
         const addedBook = await db.book.add(userId, req.body.book)
         return res.status(200).json.parse(addedBook)
       case 'DELETE': 
-        const deletedBook = await db.book.add(userId, req.body.id)
-        return res.status(200).json.parse(deletedBook)
+        const deletedBook = await db.book.remove(userId, req.body.id)
+        return res.status(200).json.parse(deletedBook.id)
       // DONE: Respond with 404 for all other requests
       default: 
-        return res.status(404).end
+        return res.status(401).end()
     }
   },
   sessionOptions
