@@ -16,11 +16,10 @@ export default withIronSessionApiRoute(
     switch(req.method) {
       // DONE: On a POST request, add a book using db.book.add with request body (must use JSON.parse)
       case 'POST': 
-        const bookRequest = req.body
-        const bookToAdd = JSON.parse(bookRequest)
+        // const bookRequest = req.body
+        // const bookToAdd = JSON.parse(req.body)
         try{
-          const addedBook = await db.book.add(userId, bookToAdd)
-          console.log ("added book: ", addedBook)
+          const addedBook = await db.book.add(userId, (JSON.parse(req.body)))
           if(addedBook == null){
             req.session.destroy()
             return res.status(401)
@@ -32,10 +31,10 @@ export default withIronSessionApiRoute(
 
       case 'DELETE': 
         // DONE: On a DELETE request, remove a book using db.book.remove with request body (must use JSON.parse)
-        const bookIDRequest = req.body
-        const bookToDelete = JSON.parse(bookIDRequest)
+        // const bookIDRequest = req.body
+        const bookToDelete = JSON.parse(req.body)
         try{
-          const deletedBook = await db.book.remove(userId, bookToDelete.id)
+          const deletedBook = await db.book.remove(userId, (bookToDelete.id))
           if(deletedBook == null){
             req.session.destroy()
             return res.status(401)

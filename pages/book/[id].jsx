@@ -57,6 +57,7 @@ export default function Book(props) {
       },
       body: JSON.stringify(book)
     })
+    console.log("response from POST: ", res)
     // Call router.replace(router.asPath) if you receive a 200 status
     if (res.status === 200) {
       router.replace(router.asPath)
